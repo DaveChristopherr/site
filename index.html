@@ -751,57 +751,11 @@ style="display:none;"
   
 <div class="toggle-wrapper">
 
-  <div class="toggle-buttons">
-    <div class="quote-button" onclick="toggleQuote()">
-    QUOTE 
-</div>
-
-  <!-- QUOTES -->
+  <!-- FAVORITES -->
     <div class="quote-button" onclick="toggleFavorites()">
     FAVORITES 
 </div>
 
-  <div class="quote-button" onclick="toggleJournal()">
-    JOURNAL 
-   </div>
-  </div>
-
-  <!-- QUOTES -->
-  <div id="quoteList" class="quote-container">
-  
-    <div class="quote-item">
-      <p style="font-weight:600;">
-        “I choose solitude over noise, clarity over approval.”
-      </p>
-      <span class="quote-author">— Dev</span>
-    </div>
-
-    <div class="quote-item">
-      <p>“There is no God. No one directs the universe.”</p>
-      <span class="quote-author">— Stephen Hawking</span>
-    </div>
-
-    <div class="quote-item">
-      <p>“Without music, life would be a mistake.”</p>
-      <span class="quote-author">— Friedrich Nietzsche</span>
-    </div>
-
-    <div class="quote-item">
-      <p>“I consider myself to be a genius who happens to play chess.”</p>
-      <span class="quote-author">— Bobby Fischer</span>
-    </div>
-
-    <div class="quote-item">
-      <p>“You will never be happy if you continue to search for what happiness consists of.”</p>
-      <span class="quote-author">— Albert Camus</span>
-    </div>
-
-    <div class="quote-item">
-      <p>“An honest man is always a child.”</p>
-      <span class="quote-author">— Socrates</span>
-    </div>
-
-  </div>
   <!-- FAVORITES -->
  <div id="favoritesCard" class="favorites-container">
 
@@ -822,15 +776,6 @@ style="display:none;"
   </div>
 
  </div>
-  <!-- JOURNAL -->
-<div id="journalCard" class="favorites-container">
-
-  <div class="card">
-    <h2>JOURNAL</h2>
-    <p>No journal entries yet. Maybe next time.</p>
-  </div>
-
-  </div>
   
 <!-- PERSONALITY -->
 <div class="card">
@@ -920,20 +865,6 @@ if(!token){
 </script>
 
 <script>
-function toggleQuote(){
-  const quote = document.getElementById("quoteList");
-  const fav = document.getElementById("favoritesCard");
-  const journal = document.getElementById("journalCard");
-
-  if(quote.classList.contains("active")){
-    quote.classList.remove("active");
-  } else {
-    quote.classList.add("active");
-    fav.classList.remove("active");
-    journal.classList.remove("active");
-  }
-}
-    
 function toggleFavorites(){
   const quote = document.getElementById("quoteList");
   const fav = document.getElementById("favoritesCard");
@@ -945,20 +876,6 @@ function toggleFavorites(){
     fav.classList.add("active");
     quote.classList.remove("active");
     journal.classList.remove("active");
-  }
-}
-
-function toggleJournal(){
-  const quote = document.getElementById("quoteList");
-  const fav = document.getElementById("favoritesCard");
-  const journal = document.getElementById("journalCard");
-
-  if(journal.classList.contains("active")){
-    journal.classList.remove("active");
-  } else {
-    journal.classList.add("active");
-    quote.classList.remove("active");
-    fav.classList.remove("active");
   }
 }
 

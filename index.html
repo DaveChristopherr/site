@@ -22,17 +22,17 @@
 }
 
 body {
-  background: #000000; /* Pure Black */
+  background: #191919; /* Mula #000000, ginawang #191919 */
   color: #ffffff;
   min-height: 100vh;
 }
-
+  
 /* TOP BAR */
 .app-bar {
   padding: 40px 25px 25px;
   text-align: center;
-  background: #000000; /* Pure Black */
-  border-bottom: 1px solid #1a1a1a;
+  background: #191919; /* Pantay sa body */
+  border-bottom: 1px solid #252525; /* Ginawang mas lighter ang border para bumagay */
 }
 
 .profile-circle{
@@ -64,17 +64,15 @@ body {
 }
 
 /* CARD */
-.card{
-  background: rgba(17,17,17,0.6);
-  border:1px solid #1f1f1f;
-  border-radius:18px;
-  padding:20px;
-  margin-bottom:18px;
-  box-shadow:0 8px 25px rgba(0,0,0,0.4);
-  transition:0.3s ease;
+.card {
+  background: rgba(35, 35, 35, 0.6);
+  border: 1px solid #2a2a2a;
+  border-radius: 18px;
+  padding: 20px;
+  margin-bottom: 18px;
   backdrop-filter: blur(8px);
 }
-
+  
 .card:hover{
   transform:translateY(-4px);
   background:#1a1a1a;
@@ -104,15 +102,17 @@ a:hover{
 
 /* WATCHLIST */
 .watchlist .folder {
-  background: linear-gradient(145deg, #0a0a0a, #141414); /* Aesthetic gradient */
-  border: 1px solid #1f1f1f;
-  padding: 18px;
+background: linear-gradient(145deg, #222222, #2a2a2a);
+  border: 1px solid #333;
+  padding: 16px 20px;
   border-radius: 15px;
   margin-bottom: 12px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   transition: 0.3s ease;
+  text-decoration: none;
+  color: white;
 }
 
 .watchlist .folder:hover {
@@ -550,15 +550,7 @@ a:hover{
   font-size: 13px;
   margin-bottom: 12px;
   letter-spacing: 1px;
-  opacity: 0.7;
-  }
-
-.profile-header {
-  position: relative;
-  padding: 40px 20px 25px;
-  text-align: center;
-  background: #000000; /* Pure Black */
-  border-bottom: 1px solid #1a1a1a;
+  opacity: 0.7; 
 }
 
 .profile-img{
@@ -601,9 +593,9 @@ a:hover{
   position: relative;
   padding: 40px 20px 25px;
   text-align: center;
-  background: #000000; /* Pure Black */
-  border-bottom: 1px solid #1a1a1a;
-  }
+  background: #191919; /* Pantay sa body */
+  border-bottom: 1px solid #252525;
+}
 
 /* MENU ICON */
 

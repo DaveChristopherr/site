@@ -482,19 +482,18 @@ a:hover{
   margin: 10px 0;
 }
 
-.app-icon{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  width:65px;
+.app-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Ginawang flex-start para mapunta sa gilid */
+  transition: 0.2s ease;
 }
 
-.app-icon img{
-  width:48px;
-  height:48px;
-  border-radius:14px;
-  object-fit:cover;
-  transition:0.2s ease;
+.app-icon img {
+  width: 60px; /* Mas malaki nang kaunti base sa screenshot */
+  height: 60px;
+  border-radius: 15px;
+  object-fit: cover;
 }
 
 .app-icon span{
@@ -750,22 +749,19 @@ style="display:none;"
 </div>
 
 <!-- CHESS -->
-<div class="card chess-card">
-<h2>CHESS</h2>
+<div style="margin-bottom: 30px;">
+  <h2 style="font-size: 13px; margin-bottom: 20px; letter-spacing: 1px; opacity: 0.7; padding-left: 5px;">CHESS</h2>
 
-<div class="app-row">
-
-  <!-- Chess.com -->
-  <a href="https://www.chess.com/member/DaveChristopherr"
-     target="_blank"
-     class="app-icon">
-    <img src="chess.com.jpg">
-    <span>Chess.com</span>
-  </a>
-
-</div>
-
-</div>
+  <div style="display: flex; justify-content: flex-start; padding-left: 5px;">
+    <a href="https://www.chess.com/member/DaveChristopherr"
+       target="_blank"
+       class="app-icon"
+       style="align-items: flex-start; width: auto;">
+      <img src="chess.com.jpg" style="width: 60px; height: 60px; border-radius: 15px;">
+      <span style="margin-top: 8px; font-size: 12px; opacity: 0.8; text-align: left;">Chess.com</span>
+    </a>
+  </div>
+</div>>
   
 <!-- WATCHLIST -->
 <div class="card watchlist">

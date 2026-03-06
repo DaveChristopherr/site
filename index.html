@@ -553,14 +553,6 @@ a:hover{
   opacity: 0.7;
   }
 
-.profile-header {
-  position: relative;
-  padding: 40px 20px 25px;
-  text-align: center;
-  background: #000000; /* Pure Black */
-  border-bottom: 1px solid #1a1a1a; /* Manipis na line para hindi masyadong matingkad */
-}
-
 .profile-img{
   width:110px;
   height:110px;
@@ -693,18 +685,23 @@ a:hover{
   opacity: 0.3;
   }
   
-.cover-video{
+.video-cover{
   width:100%;
   height:180px;
   overflow:hidden;
-  border-radius:8px;
-  margin-bottom:20px;
+  border-radius:10px;
+  margin-bottom:-55px;
 }
 
-.cover-video video{
+.video-cover video{
   width:100%;
   height:100%;
   object-fit:cover;
+}
+
+.profile-img{
+  position:relative;
+  z-index:2;
 }
   
   </style>

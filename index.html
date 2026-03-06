@@ -820,32 +820,30 @@ style="display:none;"
 </div>
 
 <!-- CHESS -->
-<div class="hobby-row">
+<div class="hobby-row" style="display: flex; gap: 15px; align-items: flex-end; margin-bottom: 30px;">
   
-  <div class="book-card" onclick="swapBook()">
-    <img id="bookCover" src="https://m.media-amazon.com/images/I/81QuEGw8VPL._AC_UF1000,1000_QL80_.jpg" class="book-img">
-    <div class="book-info">
-      <div id="bookTitle" class="book-title">The Stranger</div>
-      <div id="bookAuthor" class="book-author">Albert Camus</div>
-      <div id="bookRating" class="book-rating">
-        <i class="fas fa-star"></i>
-        <i class="fas fa-star"></i>
-        <i class="fas fa-star"></i>
-        <i class="fas fa-star"></i>
-        <i class="fas fa-star-half-alt"></i> 
-        <span style="color:white; opacity:0.6; font-size:10px; margin-left:4px;">4.5/5</span>
+  <div style="flex: 1;">
+    <h2 style="font-size: 11px; margin-bottom: 8px; letter-spacing: 1.5px; opacity: 0.7; font-weight: 600;">BOOKS READ IN 2026</h2>
+    
+    <div id="bookCard" class="book-card" style="display: flex; gap: 12px; background: rgba(17,17,17,0.6); border: 1px solid #1f1f1f; border-radius: 18px; padding: 15px; position: relative; cursor: pointer; transition: 0.3s; overflow: hidden; align-items: center; min-height: 115px; touch-action: pan-y;">
+      
+      <img id="bookCover" src="sisyphus.jpg" class="book-img" style="width: 65px; height: 90px; object-fit: cover; border-radius: 6px; box-shadow: 0 4px 10px rgba(0,0,0,0.5);">
+      
+      <div class="book-info" style="flex: 1; display: flex; flex-direction: column;">
+        <div id="bookTitle" class="book-title" style="font-size: 14px; font-weight: 600; margin-bottom: 4px;">Loading...</div>
+        <div id="bookAuthor" class="book-author" style="font-size: 11px; opacity: 0.6; margin-bottom: 8px;">Author</div>
+        <div id="bookRating" class="book-rating" style="color: #ffb400; font-size: 12px;"></div>
       </div>
+      <div class="swap-hint" style="position: absolute; bottom: 8px; right: 12px; font-size: 10px; opacity: 0.3;"><i class="fas fa-arrows-alt-h"></i> Swipe</div>
     </div>
-    <div class="swap-hint"><i class="fas fa-sync-alt"></i> Tap to swap</div>
   </div>
 
-  <div style="display: flex; align-items: center;">
-    <a href="https://www.chess.com/member/DaveChristopherr" target="_blank" class="app-icon">
-      <img src="chess.com.jpg" style="width: 60px; height: 60px; border-radius: 15px;">
-      <span style="margin-top: 8px; font-size: 11px; opacity: 0.8; text-align: center; width: 60px;">Chess.com</span>
+  <div style="margin-bottom: 5px;">
+    <a href="https://www.chess.com/member/DaveChristopherr" target="_blank" class="app-icon" style="text-decoration: none;">
+      <img src="chess.com.jpg" style="width: 60px; height: 60px; border-radius: 15px; display: block;">
+      <span style="margin-top: 8px; font-size: 11px; opacity: 0.8; text-align: center; display: block; color: white;">Chess.com</span>
     </a>
   </div>
-
 </div>
   
 <!-- WATCHLIST -->
@@ -1074,44 +1072,71 @@ document.addEventListener("DOMContentLoaded", function(){
 <script>
 const myBooks = [
   {
+    title: "The Myth of Sisyphus",
+    author: "Albert Camus",
+    cover: "sisyphus.jpg", // Palitan mo ng tamang filename ng image mo
+    rating: 4.9,
+    stars: "4.9/5"
+  },
+  {
     title: "The Stranger",
     author: "Albert Camus",
-    cover: "https://m.media-amazon.com/images/I/81QuEGw8VPL._AC_UF1000,1000_QL80_.jpg",
+    cover: "the_stranger.jpg",
+    rating: 4.9,
+    stars: "4.9/5"
+  },
+  {
+    title: "White Nights",
+    author: "Fyodor Dostoevsky",
+    cover: "white_nights.jpg",
     rating: 4.5,
     stars: "4.5/5"
   },
   {
-    title: "Beyond Good and Evil",
-    author: "Friedrich Nietzsche",
-    cover: "https://m.media-amazon.com/images/I/81M7-XW9EBL._AC_UF1000,1000_QL80_.jpg",
-    rating: 5,
-    stars: "5/5"
+    title: "The Metamorphosis",
+    author: "Franz Kafka",
+    cover: "metamorphosis.jpg",
+    rating: 4.5,
+    stars: "4.5/5"
   },
   {
-    title: "No Longer Human",
-    author: "Osamu Dazai",
-    cover: "https://m.media-amazon.com/images/I/71R3yX9Jp6L._AC_UF1000,1000_QL80_.jpg",
+    title: "The Wisdom of the Body",
+    author: "Walter Bradford Cannon",
+    cover: "wisdom_body.jpg",
     rating: 4,
     stars: "4/5"
+  },
+  {
+    title: "The Gay Science",
+    author: "Friedrich Nietzsche",
+    cover: "gay_science.jpg",
+    rating: 4.7,
+    stars: "4.7/5"
+  },
+  {
+    title: "Bobby Fischer Teaches Chess",
+    author: "Bobby Fischer",
+    cover: "bobby_fischer.jpg",
+    rating: 4.8,
+    stars: "4.8/5"
   }
 ];
 
 let currentBookIndex = 0;
+let touchstartX = 0;
+let touchendX = 0;
 
-function swapBook() {
-  currentBookIndex = (currentBookIndex + 1) % myBooks.length;
-  const book = myBooks[currentBookIndex];
-  
+function updateBookDisplay(index) {
+  const book = myBooks[index];
   document.getElementById("bookTitle").textContent = book.title;
   document.getElementById("bookAuthor").textContent = book.author;
   document.getElementById("bookCover").src = book.cover;
   
-  // Update stars based on rating
   let starHtml = "";
   for(let i=1; i<=5; i++){
     if(i <= Math.floor(book.rating)) {
       starHtml += '<i class="fas fa-star"></i> ';
-    } else if(i - 0.5 === book.rating) {
+    } else if(book.rating % 1 !== 0 && i === Math.ceil(book.rating)) {
       starHtml += '<i class="fas fa-star-half-alt"></i> ';
     } else {
       starHtml += '<i class="far fa-star"></i> ';
@@ -1120,6 +1145,23 @@ function swapBook() {
   starHtml += `<span style="color:white; opacity:0.6; font-size:10px; margin-left:4px;">${book.stars}</span>`;
   document.getElementById("bookRating").innerHTML = starHtml;
 }
+
+function handleGesture() {
+  if (touchendX < touchstartX - 50) {
+    currentBookIndex = (currentBookIndex + 1) % myBooks.length;
+    updateBookDisplay(currentBookIndex);
+  }
+  if (touchendX > touchstartX + 50) {
+    currentBookIndex = (currentBookIndex - 1 + myBooks.length) % myBooks.length;
+    updateBookDisplay(currentBookIndex);
+  }
+}
+
+const bookCard = document.getElementById('bookCard');
+bookCard.addEventListener('touchstart', e => { touchstartX = e.changedTouches[0].screenX; });
+bookCard.addEventListener('touchend', e => { touchendX = e.changedTouches[0].screenX; handleGesture(); });
+
+document.addEventListener("DOMContentLoaded", () => updateBookDisplay(0));
 </script>
   
 </body>

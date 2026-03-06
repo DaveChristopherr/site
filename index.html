@@ -333,8 +333,6 @@ a:hover{
   max-height:1000px;
   }
 
-/* SMALL QUOTE BUTTON STYLE */
-
 .quote-wrapper{
   margin-bottom:18px;
 }
@@ -491,12 +489,12 @@ a:hover{
 .app-icon {
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* Ginawang flex-start para mapunta sa gilid */
+  align-items: flex-start;
   transition: 0.2s ease;
 }
 
 .app-icon img {
-  width: 60px; /* Mas malaki nang kaunti base sa screenshot */
+  width: 60px; 
   height: 60px;
   border-radius: 15px;
   object-fit: cover;
@@ -557,8 +555,8 @@ a:hover{
   position: relative;
   padding: 40px 20px 25px;
   text-align: center;
-  background: #000000; /* Pure Black */
-  border-bottom: 1px solid #1a1a1a; /* Manipis na line para hindi masyadong matingkad */
+  background: #000000;
+  border-bottom: 1px solid #1a1a1a;
 }
 
 .profile-img{
@@ -604,25 +602,7 @@ a:hover{
   background:#000000;
   border-bottom:1px solid #1f1f1f;
 }
-
-/* MENU ICON */
-
-.menu-icon {
-  position: absolute;
-  top: 15px;
-  right: 20px;
-  font-size: 26px;
-  cursor: pointer;
-  opacity: 0.8;
-  transition: 0.2s ease;
-}
-
-.menu-icon:hover{
-  transform:scale(1.2);
-  opacity:1; 
-}
-
-/* Layout para magkatabi ang Books at Chess */
+  
 .hobby-row {
   display: flex;
   gap: 15px;
@@ -630,9 +610,8 @@ a:hover{
   margin-bottom: 30px;
 }
 
-/* Bookshelf Card Style */
 .book-card {
-  flex: 1; /* Para kuhanin ang natitirang space */
+  flex: 1; 
   background: rgba(17,17,17,0.6);
   border: 1px solid #1f1f1f;
   border-radius: 18px;
@@ -648,7 +627,7 @@ a:hover{
 .book-card:hover {
   background: #1a1a1a;
 }
-
+  
 .book-img {
   width: 60px;
   height: 85px;
@@ -681,7 +660,7 @@ a:hover{
 }
 
 .book-rating {
-  color: #ffb400; /* Gold color para sa stars */
+  color: #ffb400; 
   font-size: 12px;
 }
 
@@ -691,6 +670,22 @@ a:hover{
   right: 12px;
   font-size: 10px;
   opacity: 0.3;
+}
+
+.menu-icon {
+  position: absolute;
+  top: 20px;    
+  right: 25px;  
+  font-size: 22px; 
+  cursor: pointer;
+  opacity: 0.8;
+  transition: 0.2s ease;
+  z-index: 10;  
+}
+
+.menu-icon:hover {
+  transform: scale(1.1);
+  opacity: 1;
   }
   
   </style>
@@ -699,6 +694,9 @@ a:hover{
 <body>
 
 <div class="profile-header">
+  <div class="menu-icon">
+    <i class="fas fa-bars"></i>
+  </div>
 
   <img src="AlbertCamus.jpg" class="profile-img">
   <h1>Dave Christopher</h1>

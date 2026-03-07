@@ -429,27 +429,33 @@ a:hover{
   max-height:1000px;
 }
 
-.watching-img {
-    width: 120px;
-    height: 170px;
-    object-fit: cover;
-    border-radius: 10px;
-    margin-bottom: 10px;
-}
-
-.watching-title{
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 18px;
+/* UPDATED WATCHING CARD */
+.watching-category {
+  font-size: 10px;
   letter-spacing: 2px;
+  color: #00bfff; /* Aesthetic blue accent */
+  font-weight: 700;
+  margin-bottom: 4px;
+  display: block;
 }
 
-.netflix-logo{
-  width: 18px;
-  height: 18px;
+.watching-title-text {
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 2px;
 }
 
+.watching-sub {
+  font-size: 13px;
+  opacity: 0.6;
+}
+
+.watching-icon-mini {
+  font-size: 12px;
+  margin-right: 6px;
+  opacity: 0.8;
+}
 .chess-app{
   display:flex;
   align-items:center;
@@ -809,59 +815,21 @@ style="display:none;"
 </div>
   
 <!-- NOW WATCHING -->
-<div id="watchingCard" class="card" style="display:none;">
-
-  <h2 class="watching-title">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/7/75/Netflix_icon.svg"
-       class="netflix-logo">
-  WATCHING
-  </h2>
-
-  <div style="display:flex; gap:15px; align-items:center;">
-
-    <img id="watchImage"
-     style="width:70px; height:100px; object-fit:cover; border-radius:10px; display:none;" />
+<div id="watchingCard" class="card" style="display:none; padding: 15px 20px;">
+  <div style="display:flex; gap:18px; align-items:center;">
+    
+    <img id="watchImage" 
+         style="width:80px; height:110px; object-fit:cover; border-radius:12px; box-shadow: 0 4px 15px rgba(0,0,0,0.5);" />
 
     <div style="flex:1;">
-
-      <p><span class="label">Title:</span> 
-        <span id="watchTitle"></span>
-      </p>
-
-      <p><span class="label">Episode:</span> 
+      <span id="watchCategory" class="watching-category">WATCHING</span>
+      
+      <div class="watching-title-text" id="watchTitle">Title</div>
+      
+      <div id="episodeContainer" class="watching-sub">
+        <i class="fas fa-play-circle watching-icon-mini"></i>
         <span id="watchEpisode"></span>
-      </p>
-
-      <!-- WATCH TIMER -->
-      <div style="margin-top:12px;">
-
-        <div style="height:5px;
-                    background:#2a2a2a;
-                    border-radius:10px;
-                    overflow:hidden;">
-
-          <div id="watchProgress"
-               style="height:100%;
-                      width:0%;
-                      background:#ffffff;">
-          </div>
-
-        </div>
-
-        <div style="display:flex;
-                    justify-content:space-between;
-                    font-size:11px;
-                    opacity:0.6;
-                    margin-top:4px;">
-
-          <span id="watchCurrent">28:48</span>
-          <span id="watchTotal">1:43:00</span>
-          
-
-        </div>
-
       </div>
-
     </div>
   </div>
 </div>
@@ -1026,104 +994,44 @@ function toggleSpotify(){
 
 /* ===== NOW WATCHING WITH IMAGE ===== */
 
-function setWatching(title, episode, imageUrl){
-
+function setWatching(title, category, episode, imageUrl) {
   const card = document.getElementById("watchingCard");
   const titleEl = document.getElementById("watchTitle");
+  const categoryEl = document.getElementById("watchCategory");
   const episodeEl = document.getElementById("watchEpisode");
+  const epContainer = document.getElementById("episodeContainer");
   const imageEl = document.getElementById("watchImage");
 
-  if(title){
-
+  if (title) {
+    card.style.display = "block";
     titleEl.textContent = title;
-    episodeEl.textContent = episode || "";
+    categoryEl.textContent = category.toUpperCase(); // K-DRAMA, K-MOVIE, o MOVIE
 
-    if(imageUrl){
-      imageEl.src = imageUrl;
-      imageEl.style.display = "block";
+    // Ipakita lang ang episode at icon kung K-Drama
+    if (category.toLowerCase() === "k-drama" && episode) {
+      epContainer.style.display = "block";
+      episodeEl.textContent = "Episode " + episode;
     } else {
-      imageEl.style.display = "none";
+      epContainer.style.display = "none";
     }
 
-    card.style.display = "block";
-    
-    startWatchTimer();
-
+    if (imageUrl) {
+      imageEl.src = imageUrl;
+      imageEl.style.display = "block";
+    }
   } else {
     card.style.display = "none";
   }
 }
 
-/* ===== PERSISTENT 2 HOUR WATCH TIMER ===== */
-
-let watchInterval;
-const totalDuration = 60 * 60; // 1 hour
-function startWatchTimer(){
-
-  const progress = document.getElementById("watchProgress");
-  const currentLabel = document.getElementById("watchCurrent");
-
-  document.getElementById("watchTotal").textContent = "1:00:00";
-
-  clearInterval(watchInterval);
-
-  // Kunin saved time
-  let savedTime = localStorage.getItem("watchTime");
-  let currentTime = savedTime ? parseInt(savedTime) : 0;
-
-  updateUI(currentTime);
-
-  watchInterval = setInterval(()=>{
-
-    currentTime++;
-
-    if(currentTime >= totalDuration){
-      currentTime = totalDuration;
-      clearInterval(watchInterval);
-    }
-
-    localStorage.setItem("watchTime", currentTime);
-    updateUI(currentTime);
-
-  },1000);
-}
-
-
-function updateUI(currentTime){
-
-  const progress = document.getElementById("watchProgress");
-  const currentLabel = document.getElementById("watchCurrent");
-
-  const percent = (currentTime / totalDuration) * 100;
-  progress.style.width = percent + "%";
-
-  const hours = Math.floor(currentTime / 3600);
-  const minutes = Math.floor((currentTime % 3600) / 60);
-  const seconds = currentTime % 60;
-
-  if(hours > 0){
-    currentLabel.textContent =
-      hours + ":" +
-      (minutes < 10 ? "0" : "") + minutes + ":" +
-      (seconds < 10 ? "0" : "") + seconds;
-  } else {
-    currentLabel.textContent =
-      minutes + ":" +
-      (seconds < 10 ? "0" : "") + seconds;
-  }
-}
-
-/* OPTIONAL: Reset kapag nag change ka ng episode */
-function resetWatchTimer(){
-  localStorage.removeItem("watchTime");
-}
-
-document.addEventListener("DOMContentLoaded", function(){
-
-  setWatching("The Truman Show", "", "Trumanshow.jpg");
-
-});
+// Halimbawa ng pag-update:
+document.addEventListener("DOMContentLoaded", function() {
+  // format: (Title, Category, Episode, Image)
+  setWatching("The Truman Show", "Movie", "", "Trumanshow.jpg"); 
   
+  // Kung K-Drama, ganito:
+  // setWatching("Crash Landing on You", "K-Drama", "12", "cloy.jpg");
+});  
 
 </script>
 

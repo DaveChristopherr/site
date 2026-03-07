@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Favorite Country - Sweden</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap');
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:'Quicksand', sans-serif;
+}
+
+body {
+  background: #000000;
+  color: #ffffff;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+/* BACK BUTTON */
+.back-btn {
+  position: absolute;
+  top: 30px;
+  left: 25px;
+  font-size: 18px;
+  cursor: pointer;
+  color: rgba(255,255,255,0.6);
+  text-decoration: none;
+  z-index: 10;
+}
+
+/* MAIN CONTENT */
+.content {
+  width: 100%;
+  max-width: 750px;
+  margin-top: 80px;
+  padding: 20px 20px 80px;
+}
+
+.wiki-header {
+  border-bottom: 1px solid #1f1f1f;
+  padding-bottom: 10px;
+  margin-bottom: 30px;
+}
+
+h1 { font-size: 32px; font-weight: 600; letter-spacing: 2px; }
+
+/* INFOBOX (WIKIPEDIA STYLE) */
+.infobox {
+  background: rgba(17,17,17,0.8);
+  border: 1px solid #1f1f1f;
+  width: 100%;
+  max-width: 280px;
+  float: right;
+  margin-left: 25px;
+  margin-bottom: 20px;
+  padding: 15px;
+  border-radius: 12px;
+  font-size: 13px;
+}
+
+@media (max-width: 650px) {
+  .infobox { float: none; margin: 0 auto 30px; width: 100%; }
+}
+
+.infobox img {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.infobox table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.infobox th {
+  text-align: left;
+  padding: 8px 0;
+  width: 40%;
+  opacity: 0.4;
+  font-weight: 400;
+}
+
+.infobox td {
+  padding: 8px 0;
+  font-weight: 600;
+}
+
+/* SECTIONS */
+.section-title {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin: 35px 0 15px;
+  border-left: 3px solid #005293; /* Swedish Blue */
+  padding-left: 15px;
+}
+
+p {
+  font-size: 15px;
+  line-height: 1.8;
+  color: rgba(255,255,255,0.8);
+  margin-bottom: 20px;
+}
+
+.highlight-card {
+  background: rgba(0, 82, 147, 0.05);
+  border: 1px solid rgba(0, 82, 147, 0.2);
+  padding: 25px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+}
+
+.footer { text-align: center; font-size: 11px; opacity: 0.3; margin-top: 60px; letter-spacing: 2px; clear: both; }
+
+</style>
+</head>
+
+<body>
+
+<a href="favorites.html" class="back-btn"><i class="fas fa-arrow-left"></i></a>
+
+<div class="content">
+  <div class="wiki-header">
+    <h1>Sweden</h1>
+  </div>
+
+  <aside class="infobox">
+    <img src="sweden-flag.jpg" alt="Flag of Sweden">
+    <table>
+      <tr><th>Capital</th><td>Stockholm</td></tr>
+      <tr><th>Official Language</th><td>Swedish</td></tr>
+      <tr><th>Government</th><td>Unitary Parliamentary Monarchy</td></tr>
+      <tr><th>Global Peace Index</th><td>Highly Peaceful</td></tr>
+      <tr><th>Irreligious Pop.</th><td>~70-80%</td></tr>
+    </table>
+  </aside>
+
+  <p>
+    <b>Sweden</b> (Swedish: <i>Sverige</i>) is a Nordic country in Northern Europe. It is known globally for its high quality of life, breathtaking landscapes, and its progressive social values. For me, it represents the ideal environment for intellectual and personal freedom.
+  </p>
+
+  <div class="section-title">A Land of Peace and Reason</div>
+  <div class="highlight-card">
+    <p>
+      My fascination with Sweden stems from its reputation as one of the <b>most secular and peaceful nations</b> in the world. 
+      <br><br>
+      As a place where a large majority of the population identifies as irreligious or atheist, Sweden offers a unique society that prioritizes logic, science, and human rights over dogma. This secular environment fosters a culture of tolerance and open-mindedness that I deeply respect.
+    </p>
+  </div>
+
+  <div class="section-title">Social Harmony</div>
+  <p>
+    Beyond philosophy, Sweden is consistently ranked as one of the most peaceful countries globally. The concept of <b>"Lagom"</b>—meaning "just the right amount"—is reflected in their balanced way of living. It is a country that values silence, nature, and the peace of mind that comes with a well-organized and stable society.
+  </p>
+
+</body>
+</html>

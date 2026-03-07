@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Myth of Sisyphus - Albert Camus</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap');
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:'Quicksand', sans-serif;
+}
+
+body {
+  background: #000000;
+  color: #ffffff;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* BACK BUTTON */
+.back-btn {
+  position: absolute;
+  top: 30px;
+  left: 25px;
+  font-size: 18px;
+  cursor: pointer;
+  color: rgba(255,255,255,0.6);
+  text-decoration: none;
+  z-index: 10;
+}
+
+.back-btn:hover { color: #fff; }
+
+/* MAIN CONTENT */
+.content {
+  width: 100%;
+  max-width: 700px;
+  margin-top: 80px;
+  padding: 20px 20px 80px;
+}
+
+.header-section {
+  border-bottom: 1px solid #1f1f1f;
+  padding-bottom: 20px;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+h1 { font-size: 28px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; }
+.author-sub { font-size: 14px; opacity: 0.5; margin-top: 10px; letter-spacing: 1px; }
+
+/* INFOBOX */
+.infobox {
+  background: rgba(17,17,17,0.8);
+  border: 1px solid #1f1f1f;
+  width: 100%;
+  max-width: 260px;
+  float: right;
+  margin-left: 25px;
+  margin-bottom: 20px;
+  padding: 15px;
+  border-radius: 12px;
+  font-size: 13px;
+}
+
+@media (max-width: 650px) {
+  .infobox { float: none; margin: 0 auto 30px; width: 100%; }
+}
+
+.infobox img {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  opacity: 0.8;
+}
+
+.infobox table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.infobox th {
+  text-align: left;
+  padding: 8px 0;
+  width: 40%;
+  opacity: 0.4;
+  font-weight: 400;
+}
+
+.infobox td {
+  padding: 8px 0;
+  font-weight: 600;
+}
+
+/* CONTENT SECTIONS */
+.section-title {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin: 30px 0 15px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+p {
+  font-size: 15px;
+  line-height: 1.8;
+  color: rgba(255,255,255,0.8);
+  margin-bottom: 20px;
+}
+
+.highlight-quote {
+  font-size: 20px;
+  font-style: italic;
+  text-align: center;
+  padding: 40px 20px;
+  color: #ffffff;
+  line-height: 1.5;
+  border-top: 1px solid #1f1f1f;
+  border-bottom: 1px solid #1f1f1f;
+  margin: 40px 0;
+}
+
+.footer { text-align: center; font-size: 11px; opacity: 0.3; margin-top: 60px; letter-spacing: 2px; clear: both; }
+
+</style>
+</head>
+
+<body>
+
+<a href="favorites.html" class="back-btn"><i class="fas fa-arrow-left"></i></a>
+
+<div class="content">
+  <div class="header-section">
+    <h1>The Myth of Sisyphus</h1>
+    <div class="author-sub">Philosophical Essay by Albert Camus</div>
+  </div>
+
+  <aside class="infobox">
+    <img src="sisyphus-art.jpg" alt="Sisyphus pushing the rock">
+    <table>
+      <tr><th>Original title</th><td>Le Mythe de Sisyphe</td></tr>
+      <tr><th>Published</th><td>1942</td></tr>
+      <tr><th>Subject</th><td>Absurdism</td></tr>
+      <tr><th>Key Theme</th><td>Philosophical Suicide</td></tr>
+    </table>
+  </aside>
+
+  <p>
+    <b>The Myth of Sisyphus</b> is a 1942 philosophical essay by <b>Albert Camus</b>. In the essay, Camus introduces his philosophy of the <b>Absurd</b>: the futile search for meaning, unity, and clarity in the face of an unintelligible world devoid of God and eternal truths or values.
+  </p>
+
+  <div class="section-title"><i class="fas fa-mountain"></i> The Myth</div>
+  <p>
+    Camus uses the Greek myth of Sisyphus as a metaphor for the human condition. Sisyphus is condemned by the gods to roll a giant boulder up a hill, only for it to roll back down as soon as he reaches the top—a cycle he must repeat for eternity.
+  </p>
+
+  <div class="highlight-quote">
+    "The struggle itself toward the heights is enough to fill a man's heart. One must imagine Sisyphus happy."
+  </div>
+
+  <div class="section-title"><i class="fas fa-rebel"></i> Philosophical Rebellion</div>
+  <p>
+    According to Camus, once we recognize that life has no inherent meaning, we have two choices: despair or rebellion. Camus argues that we should embrace the struggle. By continuing to roll our "boulder" despite knowing the task is futile, we become masters of our own fate. 
+  </p>
+
+  <div class="section-title"><i class="fas fa-lightbulb"></i> Why I Value This Essay</div>
+  <p>
+    This work serves as a powerful reminder that happiness is not found in the "meaning" of the destination, but in the act of the journey itself. It teaches me to find strength in persistence and to create my own joy even when the world feels silent or indifferent.
+  </p>
+
+</body>
+</html>

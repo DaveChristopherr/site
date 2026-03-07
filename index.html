@@ -732,7 +732,7 @@ a:hover{
 
 .watch-bar-bg {
   height: 4px;
-  background: rgba(255, 255, 255, 0.2); /* White na semi-transparent */
+  background: rgba(255, 255, 255, 0.1); /* Sobrang labo na white para sa background bar */
   border-radius: 10px;
   overflow: hidden;
   margin-bottom: 4px;
@@ -740,7 +740,8 @@ a:hover{
 
 .watch-bar-fill {
   height: 100%;
-  background: #00bfff; /* Blue part */
+  background: #ffffff; /* GINAWANG WHITE ANG GUMAGALAW NA BAR */
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.5); /* Optional: Konting glow para premium tingnan */
   transition: width 0.4s ease;
 }
 
@@ -748,10 +749,10 @@ a:hover{
   display: flex;
   justify-content: space-between;
   font-size: 10px;
-  opacity: 0.6; /* Ginawang 0.6 para mas kita ang white text */
+  opacity: 0.5;
   letter-spacing: 0.5px;
   color: #ffffff;
-}
+  }
   
   </style>
 </head>
@@ -837,8 +838,8 @@ style="display:none;"
       
       <div style="flex:1;">
         <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 4px;">
-           <i id="watchIcon" class="fas fa-film" style="font-size: 10px; color: #00bfff;"></i>
-           <span id="watchCategory" style="font-size: 9px; letter-spacing: 1.5px; font-weight: 700; opacity: 0.8;">MOVIE</span>
+   <i id="watchIcon" class="fas fa-film" style="font-size: 10px; color: #ffffff; opacity: 0.8;"></i>
+   <span id="watchCategory" style="font-size: 9px; letter-spacing: 1.5px; font-weight: 700; opacity: 0.8;">MOVIE</span>
         </div>
         
         <div id="watchTitle" style="font-size: 16px; font-weight: 600; margin-bottom: 2px;"></div>
@@ -1017,44 +1018,45 @@ function toggleSpotify(){
 }
 
 /* ===== NOW WATCHING WITH IMAGE ===== */
-
 let watchInterval;
 
 function setWatching(title, category, genre, currentSeconds, totalSeconds, imageUrl) {
   const wrapper = document.getElementById("watchingWrapper");
   
-  // HIDE LOGIC: Kapag walang title o image, itatago ang buong section
+  // 1. HIDE LOGIC: Kapag walang title o image, itatago ang buong "NOW WATCHING" section
   if (!title || title.trim() === "" || !imageUrl) {
     wrapper.style.display = "none";
     clearInterval(watchInterval);
     return;
   }
 
-  // SHOW LOGIC: Ipakita kung kumpleto ang data
+  // 2. SHOW LOGIC: Ipakita ang card at punan ang data
   wrapper.style.display = "block";
   document.getElementById("watchImage").src = imageUrl;
   document.getElementById("watchImage").style.display = "block";
   document.getElementById("watchTitle").textContent = title;
   document.getElementById("watchGenre").textContent = genre;
   document.getElementById("watchCategory").textContent = "WATCHING " + category.toUpperCase();
-  document.getElementById("watchTotal").textContent = formatTime(totalSeconds);
-
+  
   clearInterval(watchInterval);
 
   let now = currentSeconds;
+  
   function updateUI() {
     if (now >= totalSeconds) {
       clearInterval(watchInterval);
       return;
     }
     now++;
+    // Ang math para sa gumagalaw na bar
     const percent = (now / totalSeconds) * 100;
     document.getElementById("watchProgress").style.width = percent + "%";
     document.getElementById("watchCurrent").textContent = formatTime(now);
+    document.getElementById("watchTotal").textContent = formatTime(totalSeconds);
   }
 
   updateUI();
-  watchInterval = setInterval(updateUI, 1000);
+  watchInterval = setInterval(updateUI, 1000); // Gumagalaw bawat segundo
 }
 
 function formatTime(seconds) {
@@ -1063,12 +1065,12 @@ function formatTime(seconds) {
   return m + ":" + (s < 10 ? "0" : "") + s;
 }
 
-// PARA MAG-TEST:
+// TEST CALL:
 document.addEventListener("DOMContentLoaded", function() {
-  // Kung gusto mong makita:
+  // Para lumabas:
   setWatching("The Truman Show", "Movie", "Drama / Sci-fi", 1980, 6180, "Trumanshow.jpg");
 
-  // Kung gusto mong itago (i-blanko mo lang):
+  // Para mawala sa Home:
   // setWatching("", "", "", 0, 0, "");
 });
 

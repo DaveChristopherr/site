@@ -27,7 +27,7 @@ body {
   overflow-x: hidden;
 }
 
-/* MENU ICON (Parehas sa Home) */
+/* MENU ICON */
 .menu-icon {
   position: absolute;
   top: 30px;
@@ -95,8 +95,8 @@ body {
   margin-bottom: 40px;
 }
 
-h1 { font-size: 28px; letter-spacing: 2px; font-weight: 600; }
-.subtitle { font-size: 13px; opacity: 0.5; letter-spacing: 3px; text-transform: uppercase; }
+h1 { font-size: 28px; letter-spacing: 2px; font-weight: 600; text-transform: uppercase; }
+.subtitle { font-size: 13px; opacity: 0.5; letter-spacing: 3px; text-transform: uppercase; margin-top: 5px; }
 
 .card {
   background: rgba(17,17,17,0.6);
@@ -116,8 +116,10 @@ p { font-size: 15px; line-height: 1.7; opacity: 0.85; }
 .tag span { font-size: 13px; font-weight: 600; }
 
 .btn-toggle {
-  background: #fff; color: #000; border: none; padding: 12px 28px; border-radius: 50px; font-size: 13px; font-weight: 600; cursor: pointer; margin-top: 15px;
+  background: #fff; color: #000; border: none; padding: 12px 28px; border-radius: 50px; font-size: 13px; font-weight: 600; cursor: pointer; margin-top: 15px; transition: 0.3s;
 }
+
+.btn-toggle:hover { background: #00bfff; color: white; }
 
 .hidden-bio { display: none; margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.05); }
 .footer { text-align: center; font-size: 11px; opacity: 0.3; margin-top: 50px; letter-spacing: 2px; }
@@ -165,13 +167,12 @@ p { font-size: 15px; line-height: 1.7; opacity: 0.85; }
   </div>
 
   <div class="card">
-    <span class="label">About me</span>
+    <span class="label">Background</span>
     <p>I am <b>Dave Christopher</b>. I am currently an aspiring developer with a deep interest in philosophy. I am inspired by Albert Camus and his exploration of human persistence in <i>The Myth of Sisyphus</i>.</p>
-    <p style="margin-top: 12px;">As an <b>Atheist</b>, I often feel somewhat disconnected from mainstream society, especially in environments where belief systems strongly influence social expectations. Because of this, I tend to prefer solitude over large gatherings. Being alone gives me the freedom to think deeply, question ideas, and reflect on life without distractions.
-For me, solitude is not something negative it is a space where clarity, curiosity, and personal growth can truly begin.</p>
+    <p style="margin-top: 12px;">As an <b>Atheist</b>, I value critical thinking and the constant questioning of established ideas. I believe that it is only through deep questioning that understanding can truly begin.</p>
 
     <div id="bioMore" class="hidden-bio">
-      <p>I also experience <b>Social anxiety</b>, which makes large crowds and constant social interaction feel overwhelming at times. Because of this, I often feel more comfortable spending time alone rather than being surrounded by many people. Solitude allows me to think clearly, recharge my energy, and focus on the things I truly enjoy such as reading, playing chess, or exploring new ideas.</p>
+      <p>I also experience <b>Social anxiety</b>, which makes large crowds and constant social interaction feel overwhelming at times. Because of this, I often feel more comfortable spending time alone. Solitude allows me to think clearly, recharge my energy, and focus on the things I truly enjoy such as reading, playing chess, or exploring new ideas.</p>
     </div>
     <button class="btn-toggle" id="toggleBtn" onclick="toggleBio()">Read More</button>
   </div>

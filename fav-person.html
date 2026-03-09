@@ -185,7 +185,7 @@ b { color: #fff; }
 }
 
 .letter-box::before {
-  content: '\f004'; /* Heart Icon */
+  content: '\f004'; /* Heart Icon Background */
   font-family: 'Font Awesome 6 Free';
   font-weight: 900;
   position: absolute;
@@ -196,9 +196,20 @@ b { color: #fff; }
   z-index: 0;
 }
 
+/* BLURRED CONTENT */
 .letter-content {
   position: relative;
   z-index: 1;
+  filter: blur(10px);
+  user-select: none;
+  pointer-events: none;
+  transition: filter 0.8s ease;
+}
+
+.letter-content.unlocked {
+  filter: blur(0);
+  user-select: auto;
+  pointer-events: auto;
 }
 
 .letter-greeting {
@@ -220,6 +231,98 @@ b { color: #fff; }
   font-family: 'Dancing Script', cursive;
   font-size: 26px;
   color: #ffb7c5;
+}
+
+/* LOCK OVERLAY UI */
+.lock-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+  z-index: 10;
+  text-align: center;
+  padding: 20px;
+  backdrop-filter: blur(2px);
+  transition: opacity 0.5s ease;
+}
+
+.lock-overlay.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.lock-icon-container {
+  position: relative;
+  margin-bottom: 15px;
+}
+
+.lock-icon-container .fa-heart {
+  font-size: 45px;
+  color: #ffb7c5;
+}
+
+.lock-icon-container .fa-lock {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 18px;
+  color: #000;
+}
+
+.lock-question {
+  font-size: 14px;
+  margin-bottom: 15px;
+  color: #fff;
+  line-height: 1.6;
+}
+
+.lock-question b {
+  color: #ffb7c5;
+  font-size: 16px;
+}
+
+.lock-input-group {
+  display: flex;
+  gap: 10px;
+}
+
+.lock-input-group input {
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: 1px solid #ffb7c5;
+  background: #111;
+  color: white;
+  outline: none;
+  font-family: 'Quicksand', sans-serif;
+  text-align: center;
+  width: 140px;
+}
+
+.lock-input-group button {
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  background: #ffb7c5;
+  color: #000;
+  font-weight: 700;
+  font-family: 'Quicksand', sans-serif;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.lock-input-group button:hover {
+  background: #ff9cb1;
+}
+
+.error-msg {
+  color: #ff4d4d;
+  font-size: 12px;
+  margin-top: 10px;
+  height: 15px;
 }
 
 .footer { text-align: center; font-size: 11px; opacity: 0.3; margin-top: 60px; letter-spacing: 2px; clear: both; }
@@ -269,18 +372,81 @@ b { color: #fff; }
   </div>
 
   <div class="letter-box">
-    <div class="letter-content">
+    
+    <div class="lock-overlay" id="lockOverlay">
+      <div class="lock-icon-container">
+        <i class="fas fa-heart"></i>
+        <i class="fas fa-lock"></i>
+      </div>
+      <p class="lock-question">
+        To unlock this letter, answer this question:<br>
+        <b>What is the name of Hanni's white dog?</b>
+      </p>
+      <div class="lock-input-group">
+        <input type="text" id="dogNameInput" placeholder="Answer...">
+        <button onclick="checkAnswer()">Unlock</button>
+      </div>
+      <p id="errorMessage" class="error-msg"></p>
+    </div>
+
+    <div class="letter-content" id="letterContent">
       <div class="letter-greeting">Dear Hanni,</div>
       <p class="letter-body">
-        For years, you have been the brightest light in my life. You are my most favorite person in the world, and I know you will be forever. Before I found you, things felt ordinary, but because of you, my life finally gained a beautiful sense of meaning and purpose. 
+        For years, you have been the brightest light in my life. You are my most favorite person in the world, and I know you will always be. Before I found you, everything in my life felt ordinary and empty, but because of you, my life finally gained a beautiful sense of meaning and purpose.
         <br><br>
-        From 2022 to 2026, my admiration for you has only grown stronger every single day. Seeing you in person during the Coca-Cola concert here in the Philippines on September 5, 2024, was the best day of my life. Seeing your smile with my own eyes was a core memory I will carry forever.
+        From 2022 to 2026, my admiration for you has only grown stronger every single day. Seeing you in person during the Coca-Cola concert here in the Philippines on September 5, 2024, was the best day of my life. Seeing your smile with my own eyes became a core memory that I will carry in my heart forever.
         <br><br>
         You are the person I have loved the longest in my entire life, and I proudly consider you my greatest love of all time. Thank you for simply existing. Because of you, I am genuinely happy.
+        <br><br>
+        It has been many months, maybe even years, since I last heard any news about you. I hope you are doing well and staying healthy. I miss you so much, even though you don’t know who I am. Still, you became the reason I found the inspiration to keep living and to keep moving forward in life.
+        <br><br>
+        Even from far away, you changed my life in a way that words can barely explain. I just hope that wherever you are, you are happy, safe, and surrounded by people who truly care about you. That alone is enough to make me smile.
       </p>
       <div class="letter-sign">Forever yours, DavePham</div>
     </div>
   </div>
 
+</div>
+
+<script>
+  // Pindutin ang Enter para ma-trigger ang Unlock
+  document.getElementById("dogNameInput").addEventListener("keypress", function(event) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      checkAnswer();
+    }
+  });
+
+  function checkAnswer() {
+    const input = document.getElementById("dogNameInput").value.trim().toLowerCase();
+    const errorMsg = document.getElementById("errorMessage");
+    const overlay = document.getElementById("lockOverlay");
+    const content = document.getElementById("letterContent");
+
+    // Tanggapin kahit uppercase, lowercase, o may space (e.g. "Mia", "mia ", "MIA")
+    if (input === "mia") {
+      overlay.classList.add("hidden");
+      content.classList.add("unlocked");
+      errorMsg.textContent = "";
+    } else {
+      errorMsg.textContent = "Incorrect answer. Please try again.";
+      // I-shake ang text para mapansin
+      errorMsg.style.animation = "none";
+      setTimeout(() => errorMsg.style.animation = "shake 0.3s", 10);
+    }
+  }
+</script>
+
+<style>
+/* Animation para sa maling sagot */
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+  100% { transform: translateX(0); }
+}
+</style>
+
 </body>
-</html>
+      </html>

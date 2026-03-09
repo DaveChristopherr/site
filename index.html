@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap');
   
 *{
   box-sizing:border-box;
@@ -121,6 +121,7 @@ a:hover{
   border-color: #333;
 }
 
+/* SOCIAL ICONS */
 .social-icons{
   display:flex;
   justify-content:center;
@@ -139,257 +140,7 @@ a:hover{
   opacity:0.7;
 }
 
-/* QUOTE DESIGN UPGRADE */
-
-.quote-item{
-  position: relative;
-  padding:20px 20px 20px 25px;
-  border-radius:16px;
-  margin-bottom:16px;
-  background:rgba(25,25,25,0.6);
-  border-left:3px solid #ffffff;
-  overflow:hidden;
-  transition:0.4s ease;
-}
-
-.quote-item::before{
-  content:"“";
-  position:absolute;
-  top:-10px;
-  right:15px;
-  font-size:80px;
-  color:rgba(255,255,255,0.04);
-  font-weight:600;
-}
-
-.quote-item:hover{
-  transform:translateY(-5px);
-  border-left:3px solid #00bfff;
-  background:#181818;
-  box-shadow:0 10px 30px rgba(0,0,0,0.6);
-}
-
-.quote-item p{
-  font-size:14px;
-  line-height:1.6;
-  font-weight:500;
-}
-
-.quote-author{
-  display:block;
-  margin-top:10px;
-  font-size:12px;
-  letter-spacing:1px;
-  opacity:0.6;
-}
-
-.quote-container{
-  max-height:0;
-  overflow:hidden;
-  transition:0.6s ease;
-}
-
-.quote-container.active{
-  max-height:1000px;
-}
-
-.quote-wrapper{
-  margin-bottom:18px;
-}
-
-.quote-button{
-  display:inline-block;
-  background:rgba(17,17,17,0.6);
-  border:1px solid #1f1f1f;
-  border-radius:18px;
-  padding:18px 28px;
-  font-size:13px;
-  letter-spacing:1px;
-  opacity:0.8;
-  cursor:pointer;
-  transition:0.3s ease;
-  backdrop-filter: blur(8px);
-}
-
-.quote-button:hover{
-  background:#1a1a1a;
-  transform:translateY(-4px);
-  opacity:1;
-}
-
-.footer{
-  text-align:center;
-  font-size:12px;
-  opacity:0.6;
-  margin-top:25px;
-}
-
-*{
-  -webkit-tap-highlight-color: transparent;
-}
-
-.quote-item:focus,
-.quote-button:focus{
-  outline: none;
-}
-
-::selection{
-  background: transparent;
-  color: inherit;
-}
-
-.toggle-wrapper{
-  margin-bottom:18px;
-}
-
-.toggle-buttons{
-  display:flex;
-  justify-content:center;
-  gap:15px;
-  margin-bottom:10px;
-}
-
-.favorite-card{
-  display:none;
-  margin-top:10px;
-}
-
-.favorite-card.active{
-  display:block;
-}
-
-.quote-item{
-  -webkit-tap-highlight-color: transparent;
-  user-select: none;
-}
-
-.quote-item:active,
-.quote-item:focus{
-  outline: none;
-  background: rgba(25,25,25,0.6);
-}
-
-.quote-item *{
-  -webkit-tap-highlight-color: transparent;
-}
-
-.quote-container{
-  user-select: none;
-}
-
-.favorites-container{
-  max-height:0;
-  overflow:hidden;
-  transition:0.6s ease;
-  margin-bottom:20px;
-}
-
-.favorites-container.active{
-  max-height:1000px;
-}
-
-/* UPDATED WATCHING CARD */
-.watching-category {
-  font-size: 10px;
-  letter-spacing: 2px;
-  color: #00bfff; 
-  font-weight: 700;
-  margin-bottom: 4px;
-  display: block;
-}
-
-.watching-title-text {
-  font-size: 18px;
-  font-weight: 600;
-  color: #ffffff;
-  margin-bottom: 2px;
-}
-
-.watching-sub {
-  font-size: 13px;
-  opacity: 0.6;
-}
-
-.watching-icon-mini {
-  font-size: 12px;
-  margin-right: 6px;
-  opacity: 0.8;
-}
-
-.chess-app{
-  display:flex;
-  align-items:center;
-  gap:14px;
-  background:#111;
-  padding:14px;
-  border-radius:16px;
-  border:1px solid #1f1f1f;
-  transition:0.3s ease;
-}
-
-.chess-app:hover{
-  transform:translateY(-4px);
-  background:#1a1a1a;
-  box-shadow:0 8px 20px rgba(0,0,0,0.6);
-}
-
-.chess-icon{
-  width:55px;
-  height:55px;
-  border-radius:14px;
-  object-fit:cover;
-}
-
-.chess-app span{
-  font-size:15px;
-  font-weight:600;
-}
-
-.app-row {
-  display: flex;
-  justify-content: center;
-  gap: 18px;
-  margin: 10px 0;
-}
-
-.app-icon {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  transition: 0.2s ease;
-}
-
-.app-icon img {
-  width: 45px;
-  height: 45px;
-  border-radius: 12px;
-  object-fit: cover;
-  transition: 0.2s ease;
-}
-
-.app-icon span {
-  margin-top: 6px;
-  font-size: 11px;
-  color: white;
-  opacity: 0.85;
-  text-align: center;
-}
-
-.app-icon:hover img{
-  transform:scale(1.08);
-}
-
-.chess-card {
-  padding: 14px 16px 2px;
-}
-  
-.chess-card h2 {
-  font-size: 13px;
-  margin-bottom: 12px;
-  letter-spacing: 1px;
-  opacity: 0.7;
-}
-
+/* HEADER INFO */
 .profile-header {
   position: relative;
   padding: 40px 20px 25px;
@@ -412,28 +163,84 @@ a:hover{
   letter-spacing:1px;
 }
 
-.profile-social{
-  display:flex;
-  justify-content:center;
-  gap:20px;
-  margin-top:18px;
-  padding:10px 18px;
-  width:fit-content;
-  margin-left:auto;
-  margin-right:auto;
-}
-
-.profile-social a {
-  font-size: 24px;
-  color: white;
+/* MENU ICON */
+.menu-icon {
+  position: absolute;
+  top: 20px;    
+  right: 25px;  
+  font-size: 22px; 
+  cursor: pointer;
+  opacity: 0.8;
   transition: 0.2s ease;
+  z-index: 10;  
 }
 
-.profile-social a:hover{
-  transform:scale(1.15);
-  opacity:0.8;
+.menu-icon:hover {
+  transform: scale(1.1);
+  opacity: 1;
 }
 
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 14px 18px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.7);
+  transition: 0.3s ease;
+  text-decoration: none;
+}
+
+.menu-item i {
+  width: 20px;
+  font-size: 18px;
+  opacity: 0.8;
+}
+
+.menu-item:hover {
+  background: rgba(255,255,255,0.05);
+  color: #ffffff;
+  transform: translateX(5px);
+}
+
+.menu-item.active {
+  background: rgba(255,255,255,0.1);
+  color: #ffffff;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+/* WATCHING PROGRESS STYLE */
+.watch-progress-container {
+  margin-top: 10px;
+}
+
+.watch-bar-bg {
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1); 
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 4px;
+}
+
+.watch-bar-fill {
+  height: 100%;
+  background: #ffffff; 
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+  transition: width 0.4s ease;
+}
+
+.watch-time-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  opacity: 0.5;
+  letter-spacing: 0.5px;
+  color: #ffffff;
+}
+
+/* HOBBY ROW (BOOKS + FAV PERSON) */
 .hobby-row {
   display: flex;
   gap: 15px;
@@ -441,6 +248,7 @@ a:hover{
   margin-bottom: 30px;
 }
 
+/* BOOK CARD */
 .book-card {
   flex: 1; 
   background: rgba(17,17,17,0.6);
@@ -453,6 +261,9 @@ a:hover{
   cursor: pointer;
   transition: 0.3s;
   overflow: hidden;
+  min-height: 115px;
+  touch-action: pan-y;
+  align-items: center;
 }
 
 .book-card:hover {
@@ -503,80 +314,41 @@ a:hover{
   opacity: 0.3;
 }
 
-.menu-icon {
-  position: absolute;
-  top: 20px;    
-  right: 25px;  
-  font-size: 22px; 
-  cursor: pointer;
-  opacity: 0.8;
-  transition: 0.2s ease;
-  z-index: 10;  
-}
-
-.menu-icon:hover {
-  transform: scale(1.1);
-  opacity: 1;
-}
-
-.menu-item {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  padding: 14px 18px;
-  border-radius: 12px;
-  font-size: 15px;
-  font-weight: 500;
-  color: rgba(255,255,255,0.7);
-  transition: 0.3s ease;
-  text-decoration: none;
-}
-
-.menu-item i {
-  width: 20px;
-  font-size: 18px;
-  opacity: 0.8;
-}
-
-.menu-item:hover {
-  background: rgba(255,255,255,0.05);
-  color: #ffffff;
-  transform: translateX(5px);
-}
-
-.menu-item.active {
-  background: rgba(255,255,255,0.1);
-  color: #ffffff;
-  border: 1px solid rgba(255,255,255,0.1);
-}
-  
-/* WATCHING PROGRESS STYLE */
-.watch-progress-container {
-  margin-top: 10px;
-}
-
-.watch-bar-bg {
-  height: 4px;
-  background: rgba(255, 255, 255, 0.1); 
-  border-radius: 10px;
+/* FAVORITE PERSON BOX DESIGN (PURE ANIMATED IMAGE BOX) */
+.fav-person-card {
+  width: 90px;
+  height: 115px; /* Matches the exact height of the book card */
+  border-radius: 18px;
   overflow: hidden;
-  margin-bottom: 4px;
+  display: block;
+  position: relative;
+  border: 1px solid rgba(255, 183, 197, 0.2);
+  transition: all 0.4s ease;
+  animation: pinkGlow 3s infinite alternate; /* The breathing animation */
 }
 
-.watch-bar-fill {
+.fav-person-card img {
+  width: 100%;
   height: 100%;
-  background: #ffffff; 
-  box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
-  transition: width 0.4s ease;
+  object-fit: cover;
+  transition: transform 0.5s ease, filter 0.5s ease;
+  filter: brightness(0.85); /* Slightly darker initially */
 }
 
-.watch-time-info {
-  display: flex;
-  justify-content: space-between;
-  font-size: 10px;
-  opacity: 0.5;
-  letter-spacing: 0.5px;
-  color: #ffffff;
+.fav-person-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(255, 183, 197, 0.8);
+}
+
+.fav-person-card:hover img {
+  transform: scale(1.15); /* Zoom effect */
+  filter: brightness(1.1); /* Gets brighter when hovered */
+}
+
+/* GLOW ANIMATION EFFECT */
+@keyframes pinkGlow {
+  0% { box-shadow: 0 0 5px rgba(255, 183, 197, 0.1); }
+  100% { box-shadow: 0 0 20px rgba(255, 183, 197, 0.4); }
 }
   
 </style>
@@ -604,18 +376,17 @@ a:hover{
 
 <div class="profile-header">
   <div class="menu-icon" onclick="toggleSideMenu()">
-  <i class="fas fa-bars"></i>
+    <i class="fas fa-bars"></i>
   </div>
 
-  <img src="AlbertCamus.jpg" class="profile-img">
+  <img src="AlbertCamus.jpg" class="profile-img" alt="Profile">
   <h1>Dave Christopher</h1>
-
 </div>
 
 <div class="content">
 
 <div id="watchingWrapper" style="margin-bottom: 25px; display: none;">
-  <h2 style="font-size: 11px; margin-bottom: 8px; letter-spacing: 1.5px; opacity: 0.7; font-weight: 600; padding-left: 2px;">NOW WATCHING</h2>
+  <h2>NOW WATCHING</h2>
   
   <div id="watchingCard" class="card" style="margin-bottom: 0; padding: 18px; min-height: 125px;">
     <div style="display:flex; gap:15px; align-items:center;">
@@ -623,12 +394,12 @@ a:hover{
       
       <div style="flex:1;">
         <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 4px;">
-   <i id="watchIcon" class="fas fa-film" style="font-size: 10px; color: #ffffff; opacity: 0.8;"></i>
-   <span id="watchCategory" style="font-size: 9px; letter-spacing: 1.5px; font-weight: 700; opacity: 0.8;">MOVIE</span>
+          <i id="watchIcon" class="fas fa-film" style="font-size: 10px; color: #ffffff; opacity: 0.8;"></i>
+          <span id="watchCategory" class="watching-category" style="color:#00bfff;">MOVIE</span>
         </div>
         
-        <div id="watchTitle" style="font-size: 16px; font-weight: 600; margin-bottom: 2px;"></div>
-        <div id="watchGenre" style="font-size: 11px; opacity: 0.6; margin-bottom: 8px;"></div>
+        <div id="watchTitle" class="watching-title-text"></div>
+        <div id="watchGenre" class="watching-sub" style="margin-bottom: 8px;"></div>
 
         <div class="watch-progress-container">
           <div class="watch-bar-bg">
@@ -644,35 +415,34 @@ a:hover{
   </div>
 </div>
 
-<div class="hobby-row" style="display: flex; gap: 15px; align-items: flex-end; margin-bottom: 30px;">
+<div class="hobby-row">
   
   <div style="flex: 1;">
-    <h2 style="font-size: 11px; margin-bottom: 8px; letter-spacing: 1.5px; opacity: 0.7; font-weight: 600;">BOOKS READ IN 2026</h2>
+    <h2>BOOKS READ IN 2026</h2>
     
-    <div id="bookCard" class="book-card" style="display: flex; gap: 12px; background: rgba(17,17,17,0.6); border: 1px solid #1f1f1f; border-radius: 18px; padding: 15px; position: relative; cursor: pointer; transition: 0.3s; overflow: hidden; align-items: center; min-height: 115px; touch-action: pan-y;">
+    <div id="bookCard" class="book-card">
+      <img id="bookCover" src="sisyphus.jpg" class="book-img">
       
-      <img id="bookCover" src="sisyphus.jpg" class="book-img" style="width: 65px; height: 90px; object-fit: cover; border-radius: 6px; box-shadow: 0 4px 10px rgba(0,0,0,0.5);">
-      
-      <div class="book-info" style="flex: 1; display: flex; flex-direction: column;">
-  <div id="bookCount" style="font-size: 9px; opacity: 0.5; margin-bottom: 2px; letter-spacing: 1px;"></div>
-  <div id="bookTitle" class="book-title" style="font-size: 14px; font-weight: 600; margin-bottom: 4px;">Loading...</div>
-  <div id="bookAuthor" class="book-author" style="font-size: 11px; opacity: 0.6; margin-bottom: 8px;">Author</div>
-  <div id="bookRating" class="book-rating" style="color: #ffb400; font-size: 12px;"></div>
+      <div class="book-info">
+        <div id="bookCount" style="font-size: 9px; opacity: 0.5; margin-bottom: 2px; letter-spacing: 1px;"></div>
+        <div id="bookTitle" class="book-title">Loading...</div>
+        <div id="bookAuthor" class="book-author">Author</div>
+        <div id="bookRating" class="book-rating"></div>
       </div>
-      <div class="swap-hint" style="position: absolute; bottom: 8px; right: 12px; font-size: 10px; opacity: 0.3;"><i class="fas fa-arrows-alt-h"></i> Swipe</div>
+      <div class="swap-hint"><i class="fas fa-arrows-alt-h"></i> Swipe</div>
     </div>
   </div>
 
-  <div style="margin-bottom: 5px;">
-    <a href="chess.html" class="app-icon" style="text-decoration: none;">
-      <img src="chess.com.jpg" style="width: 60px; height: 60px; border-radius: 15px; display: block;">
-      <span style="margin-top: 8px; font-size: 11px; opacity: 0.8; text-align: center; display: block; color: white;">Chess.com</span>
+  <div style="display: flex; flex-direction: column; justify-content: flex-end;">
+    <a href="fav-person.html" class="fav-person-card">
+      <img src="hanni-wiki.jpeg" alt="Favorite Person">
     </a>
   </div>
+
 </div>
   
 <div style="margin-bottom: 30px;">
-  <h2 style="font-size: 11px; margin-bottom: 10px; letter-spacing: 1.5px; opacity: 0.7; font-weight: 600; padding-left: 2px;">WATCHLIST</h2>
+  <h2 style="padding-left: 2px;">WATCHLIST</h2>
   
   <div class="watchlist">
     <a href="kdrama.html">
@@ -692,17 +462,17 @@ a:hover{
 </div>
 
 <script>
-function toggleFavorites(){
-  const quote = document.getElementById("quoteList");
-  const fav = document.getElementById("favoritesCard");
-  const journal = document.getElementById("journalCard");
+/* ===== SIDE MENU SCRIPT ===== */
+function toggleSideMenu() {
+  const menu = document.getElementById("sideMenu");
+  const overlay = document.getElementById("menuOverlay");
 
-  if(fav.classList.contains("active")){
-    fav.classList.remove("active");
+  if (menu.style.right === "0px") {
+    menu.style.right = "-260px";
+    overlay.style.display = "none";
   } else {
-    fav.classList.add("active");
-    quote.classList.remove("active");
-    journal.classList.remove("active");
+    menu.style.right = "0px";
+    overlay.style.display = "block";
   }
 }
 
@@ -727,30 +497,26 @@ function setWatching(title, category, genre, defaultStartSeconds, totalSeconds, 
   
   clearInterval(watchInterval);
 
-  // Gamitin ang LocalStorage para i-save ang oras
   let savedTitle = localStorage.getItem("watchTitle");
   let now = defaultStartSeconds;
 
-  // Kung parehas pa rin ang pinapanood natin, kunin ang saved time
   if (savedTitle === title) {
     let savedTime = localStorage.getItem("watchTime");
     if (savedTime !== null) {
       now = parseInt(savedTime, 10);
     }
   } else {
-    // Kung bago ang pinapanood, i-save ang bagong title
     localStorage.setItem("watchTitle", title);
     localStorage.setItem("watchTime", now);
   }
 
   function updateUI() {
     if (now >= totalSeconds) {
-      now = 0; // Babalik sa 0:00 kapag natapos (Looping)
+      now = 0; 
     } else {
       now++;
     }
 
-    // Save agad sa browser para hindi mawala pag nag-refresh
     localStorage.setItem("watchTime", now);
 
     const percent = (now / totalSeconds) * 100;
@@ -769,14 +535,12 @@ function formatTime(seconds) {
   return m + ":" + (s < 10 ? "0" : "") + s;
 }
 
-// TEST CALL: (Puwede mong palitan ang details kapag may iba ka nang papanoorin)
+// TEST CALL:
 document.addEventListener("DOMContentLoaded", function() {
   setWatching("Boyfriend on Demand", "K-DRAMA", "Romantic comedy", 1000, 3540, "Boyfriend_on_Demand_poster.png");
 });
 
-</script>
-
-<script>
+/* ===== BOOKS CAROUSEL SCRIPT ===== */
 const myBooks = [
   {
     title: "The Myth of Sisyphus",
@@ -833,7 +597,6 @@ function updateBookDisplay(index) {
   const coverEl = document.getElementById("bookCover");
   const ratingEl = document.getElementById("bookRating");
 
-  // Smooth transition effect
   titleEl.style.opacity = 0;
   authorEl.style.opacity = 0;
   coverEl.style.opacity = 0;
@@ -843,7 +606,6 @@ function updateBookDisplay(index) {
     authorEl.textContent = book.author;
     coverEl.src = book.cover;
     
-    // Star Rating Logic
     let starHtml = "";
     for(let i = 1; i <= 5; i++) {
       if(i <= Math.floor(book.rating)) {
@@ -857,7 +619,6 @@ function updateBookDisplay(index) {
     starHtml += `<span style="color:white; opacity:0.6; font-size:10px; margin-left:4px;">${book.stars}</span>`;
     ratingEl.innerHTML = starHtml;
 
-    // Fade back in
     titleEl.style.opacity = 1;
     authorEl.style.opacity = 0.6;
     coverEl.style.opacity = 1;
@@ -866,12 +627,10 @@ function updateBookDisplay(index) {
 
 function handleGesture() {
   if (touchendX < touchstartX - 50) {
-    // Swipe Left - Next
     currentBookIndex = (currentBookIndex + 1) % myBooks.length;
     updateBookDisplay(currentBookIndex);
   }
   if (touchendX > touchstartX + 50) {
-    // Swipe Right - Previous
     currentBookIndex = (currentBookIndex - 1 + myBooks.length) % myBooks.length;
     updateBookDisplay(currentBookIndex);
   }
@@ -881,23 +640,8 @@ const bookCard = document.getElementById('bookCard');
 bookCard.addEventListener('touchstart', e => { touchstartX = e.changedTouches[0].screenX; });
 bookCard.addEventListener('touchend', e => { touchendX = e.changedTouches[0].screenX; handleGesture(); });
 
-// Load first book on start
 document.addEventListener("DOMContentLoaded", () => updateBookDisplay(0));
-
-function toggleSideMenu() {
-  const menu = document.getElementById("sideMenu");
-  const overlay = document.getElementById("menuOverlay");
-
-  if (menu.style.right === "0px") {
-    menu.style.right = "-260px";
-    overlay.style.display = "none";
-  } else {
-    menu.style.right = "0px";
-    overlay.style.display = "block";
-  }
-}
-  
 </script>
-
+  
 </body>
-</html>
+  </html>

@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Human Verification Protocol</title>
+    <style>
+        /* =========================================
+           CSS RESET & BASE THEME (PURE WHITE)
+           ========================================= */
+        :root {
+            --primary-blue: #1a73e8;
+            --primary-hover: #1557b0;
+            --error-red: #d93025;
+            --border-color: #dadce0;
+            --text-main: #202124;
+            --text-muted: #5f6368;
+            --bg-light: #f8f9fa;
+        }
+
+        body, html {
+            margin: 0; padding: 0;
+            background-color: #ffffff;
+            color: var(--text-main);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* =========================================
+           TYPOGRAPHY & HEADER
+           ========================================= */
+        .header {
+            text-align: center;
+            margin-top: 10vh;
+            user-select: none;
+        }
+        .header h1 {
+            font-size: 26px; font-weight: 500;
+            margin: 0 0 5px 0; letter-spacing: -0.5px;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+        }
+        .header h3 {
+            font-size: 14px; font-weight: 400;
+            color: var(--text-muted); margin: 0;
+        }
+
+        /* =========================================
+           MAIN CONTAINER & BOXES
+           ========================================= */
+        .game-wrapper {
+            margin-top: 35px;
+            width: 100%; max-width: 350px;
+            padding: 0 20px; box-sizing: border-box;
+        }
+
+        .box {
+            background-color: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 24px 20px; width: 100%;
+            box-sizing: border-box;
+            box-shadow: 0px 1px 3px rgba(0,0,0,0.04);
+            position: relative;
+        }
+
+        /* =========================================
+           ANIMATIONS
+           ========================================= */
+        .shake {
+            animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
+            border-color: var(--error-red) !important;
+        }
+        @keyframes shake {
+            10%, 90% { transform: translate3d(-1px, 0, 0); }
+            20%, 80% { transform: translate3d(2px, 0, 0); }
+            30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+            40%, 60% { transform: translate3d(4px, 0, 0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* =========================================
+           UI COMPONENTS (INPUTS, BUTTONS, TOASTS)
+           ========================================= */
+        .error-toast {
+            color: var(--error-red); font-size: 12px; text-align: center;
+            margin-top: 12px; min-height: 15px; font-weight: 500;
+        }
+
+        .task-content { text-align: center; }
+        .task-content p { margin: 0 0 15px 0; font-size: 15px; line-height: 1.5; }
+        
+        input[type="text"], input[type="number"] {
+            width: 100%; padding: 12px; font-size: 14px;
+            border: 1px solid var(--border-color); border-radius: 4px;
+            margin-bottom: 15px; box-sizing: border-box;
+            text-align: center; outline: none;
+            transition: border-color 0.2s;
+        }
+        input[type="text"]:focus, input[type="number"]:focus {
+            border-color: var(--primary-blue);
+        }
+
+        button.action-btn {
+            background-color: #ffffff; border: 1px solid var(--border-color);
+            padding: 10px 20px; font-size: 14px; font-weight: 500;
+            cursor: pointer; border-radius: 4px; color: var(--primary-blue);
+            width: 100%; transition: all 0.2s ease;
+        }
+        button.action-btn:hover { background-color: var(--bg-light); }
+
+        /* =========================================
+           SPECIFIC LEVEL LAYOUTS
+           ========================================= */
+        
+        /* Level 1 reCAPTCHA styling */
+        .recaptcha-layout {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 12px 10px 12px 15px;
+        }
+        .checkbox-area { display: flex; align-items: center; gap: 12px; }
+        .checkbox-area input[type="checkbox"] {
+            width: 26px; height: 26px; margin: 0; cursor: pointer;
+            border: 2px solid #c1c1c1; border-radius: 2px;
+        }
+        .checkbox-area span { font-size: 14px; }
+        .logo-area { display: flex; flex-direction: column; align-items: center; text-align: center; }
+        .logo-area img { width: 28px; margin-bottom: 2px; opacity: 0.7; }
+        .logo-area span { font-size: 9px; color: var(--text-muted); }
+
+        /* Image Grid Layout */
+        .image-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 6px; margin-bottom: 15px;
+        }
+        .grid-item {
+            aspect-ratio: 1; background: var(--bg-light); display: flex;
+            align-items: center; justify-content: center; font-size: 30px;
+            cursor: pointer; border-radius: 3px; border: 2px solid transparent; user-select: none;
+        }
+        .grid-item.selected { border-color: var(--primary-blue); background: #e8f0fe; }
+
+        /* Odd one out grid */
+        .odd-grid {
+            display: grid; grid-template-columns: repeat(6, 1fr);
+            gap: 5px; margin-bottom: 15px; font-family: 'Courier New', Courier, monospace;
+            font-size: 18px; user-select: none;
+        }
+        .odd-cell { cursor: pointer; padding: 6px; border-radius: 3px; }
+        .odd-cell:hover { background-color: var(--bg-light); }
+
+        /* =========================================
+           FOOTER & MODALS
+           ========================================= */
+        .footer {
+            position: fixed; bottom: 0; left: 0; width: 100%;
+            display: flex; justify-content: space-between; padding: 20px;
+            box-sizing: border-box; background-color: #ffffff;
+            border-top: 1px solid var(--bg-light);
+        }
+        .footer-btn {
+            background-color: transparent; border: none; font-size: 13px;
+            color: var(--text-muted); cursor: pointer; padding: 5px 10px; border-radius: 4px; text-decoration: underline;
+        }
+        .footer-btn:hover { background-color: var(--bg-light); color: var(--text-main); }
+        .footer-txt { font-size: 13px; color: var(--text-muted); padding: 5px 10px; }
+
+        .overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255,255,255,0.95); display: none;
+            flex-direction: column; align-items: center; justify-content: center; z-index: 100;
+        }
+        .modal-box {
+            background: white; padding: 25px; border-radius: 4px;
+            border: 1px solid var(--border-color); text-align: center; max-width: 300px;
+            box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+        }
+        .modal-btns { display: flex; gap: 10px; margin-top: 25px; }
+        .modal-btns button {
+            flex: 1; padding: 12px; border: none; border-radius: 4px; cursor: pointer; font-weight: 500; transition: 0.2s;
+        }
+        .modal-btns button.confirm { background: var(--error-red); color: white; }
+        .modal-btns button.confirm:hover { background: #b3261e; }
+        .modal-btns button.cancel { background: var(--bg-light); color: var(--text-main); border: 1px solid var(--border-color); }
+        .modal-btns button.cancel:hover { background: #e8eaed; }
+    </style>
+</head>
+<body>
+
+    <div id="reset-modal" class="overlay">
+        <div class="modal-box">
+            <h2 style="margin-top:0; font-size: 20px; font-weight: 500;">Reset Verification?</h2>
+            <p style="font-size:14px; color:#5f6368; line-height: 1.5;">Are you sure you want to start over? Your progress will be lost and you will return to Level 1 with newly randomized questions.</p>
+            <div class="modal-btns">
+                <button class="confirm" onclick="confirmReset()">Yes, Reset</button>
+                <button class="cancel" onclick="hideReset()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="header">
+        <h1>🤖 I'm Not A Robot</h1>
+        <h3 id="level-title">Level 1: Verification</h3>
+    </div>
+
+    <div class="game-wrapper" id="game-container">
+        </div>
+
+    <div class="footer">
+        <button class="footer-btn" onclick="showReset()">Reset Progress</button>
+        <div class="footer-txt">Made by devxdave ☕</div>
+    </div>
+
+    <script>
+        // DOM Elements
+        const container = document.getElementById('game-container');
+        const titleText = document.getElementById('level-title');
+        
+        // Game State Variables
+        let currentLevelIndex = 0;
+        let gameSequence = []; // Will hold exactly 100 functions representing levels
+
+        // Array of randomized error messages for organic UX
+        const errorMessages = [
+            "Incorrect. Are you a bot?", 
+            "Logic error detected.", 
+            "Humanity test failed.", 
+            "Invalid response.",
+            "Try again, script.",
+            "Mathematical error.",
+            "Verification failed. Retry."
+        ];
+
+        /**
+         * Triggers the CSS shake animation on the game box and 
+         * displays a random error toast message.
+         */
+        function triggerError() {
+            const box = document.getElementById('current-box');
+            const toast = document.getElementById('error-msg');
+            toast.innerText = errorMessages[Math.floor(Math.random() * errorMessages.length)];
+            
+            box.classList.remove('shake');
+            void box.offsetWidth; // Trigger reflow
+            box.classList.add('shake');
+            setTimeout(() => { box.classList.remove('shake'); }, 400);
+        }
+
+
+        // =========================================
+        // GENERATOR FUNCTIONS (FACTORY PATTERN)
+        // These functions return a function that renders a specific puzzle.
+        // =========================================
+
+        /**
+         * Generator: Math - Basic Arithmetic (Addition, Subtraction, Multiplication)
+         */
+        function genMathArithmetic() {
+            return function() {
+                const ops = ['+', '-', '*'];
+                const op = ops[Math.floor(Math.random() * ops.length)];
+                let a, b, answer;
+
+                if (op === '*') {
+                    a = Math.floor(Math.random() * 12) + 2;
+                    b = Math.floor(Math.random() * 12) + 2;
+                    answer = a * b;
+                } else if (op === '-') {
+                    a = Math.floor(Math.random() * 50) + 20;
+                    b = Math.floor(Math.random() * 20) + 1;
+                    answer = a - b;
+                } else {
+                    a = Math.floor(Math.random() * 100) + 1;
+                    b = Math.floor(Math.random() * 100) + 1;
+                    answer = a + b;
+                }
+
+                container.innerHTML = `
+                    <div class="box task-content fade-in" id="current-box">
+                        <p>Solve the equation:</p>
+                        <h2 style="font-weight:400; margin:15px 0;">${a} ${op} ${b} = ?</h2>
+                        <input type="number" id="ans-in" placeholder="Enter number">
+                        <button class="action-btn" onclick="if(document.getElementById('ans-in').value == ${answer}) nextLevel(); else triggerError();">Verify</button>
+                        <div class="error-toast" id="error-msg"></div>
+                    </div>
+                `;
+            }
+        }
+
+        /**
+         * Generator: Math - Basic Algebra (Solve for x)
+         */
+        function genMathAlgebra() {
+            return function() {
+                const x = Math.floor(Math.random() * 10) + 2; // Value of x
+                const multiplier = Math.floor(Math.random() * 5) + 2;
+                const addition = Math.floor(Math.random() * 20) + 1;
+                const result = (multiplier * x) + addition;
+
+                container.innerHTML = `
+                    <div class="box task-content fade-in" id="current-box">
+                        <p>Solve for <strong>x</strong>:</p>
+                        <h2 style="font-weight:400; margin:15px 0;">${multiplier}x + ${addition} = ${result}</h2>
+                        <input type="number" id="ans-in" placeholder="Value of x">
+                        <button class="action-btn" onclick="if(document.getElementById('ans-in').value == ${x}) nextLevel(); else triggerError();">Verify</button>
+                        <div class="error-toast" id="error-msg"></div>
+                    </div>
+                `;
+            }
+        }
+
+        /**
+         * Generator: Math - Number Sequences
+         */
+        function genMathSequence() {
+            return function() {
+                const start = Math.floor(Math.random() * 10) + 1;
+                const step = Math.floor(Math.random() * 5) + 2;
+                const seq = [start, start + step, start + (step*2), start + (step*3)];
+                const answer = start + (step*4);
+
+                container.innerHTML = `
+                    <div class="box task-content fade-in" id="current-box">
+                        <p>What is the next number in the sequence?</p>
+                        <h2 style="font-weight:400; margin:15px 0; letter-spacing: 2px;">${seq.join(', ')}, ?</h2>
+                        <input type="number" id="ans-in" placeholder="Next number">
+                        <button class="action-btn" onclick="if(document.getElementById('ans-in').value == ${answer}) nextLevel(); else triggerError();">Verify</button>
+                        <div class="error-toast" id="error-msg"></div>
+                    </div>
+                `;
+            }
+        }
+
+        /**
+         * Generator: Logic & Hardcoded Trivia
+         */
+        function genTrivia(question, answer) {
+            return function() {
+                container.innerHTML = `
+                    <div class="box task-content fade-in" id="current-box">
+                        <p>${question}</p>
+                        <input type="text" id="ans-in" placeholder="Type your answer" autocomplete="off">
+                        <button class="action-btn" onclick="if(document.getElementById('ans-in').value.trim().toLowerCase() === '${answer}'.toLowerCase()) nextLevel(); else triggerError();">Verify</button>
+                        <div class="error-toast" id="error-msg"></div>
+                    </div>
+                `;
+            }
+        }
+
+        /**
+         * Generator: Typing Test (Exact Match, Case Sensitive)
+         */
+        function genTypingTest(word) {
+            return function() {
+                container.innerHTML = `
+                    <div class="box task-content fade-in" id="current-box">
+                        <p>Type exactly as shown (Case Sensitive):</p>
+                        <div style="background:var(--bg-light); padding:10px; border-radius:4px; margin-bottom:15px; font-family:monospace; font-size:16px;">
+                            ${word}
+                        </div>
+                        <input type="text" id="ans-in" placeholder="..." autocomplete="off">
+                        <button class="action-btn" onclick="if(document.getElementById('ans-in').value === '${word}') nextLevel(); else triggerError();">Verify</button>
+                        <div class="error-toast" id="error-msg"></div>
+                    </div>
+                `;
+            }
+        }
+
+        /**
+         * Generator: Odd One Out Character Grid
+         */
+        function genOddOneOut() {
+            const pairs = [
+                { normal: "O", odd: "0" }, { normal: "I", odd: "l" }, 
+                { normal: "rn", odd: "m" }, { normal: "8", odd: "B" },
+                { normal: "vv", odd: "w" }, { normal: "db", odd: "dp" }
+            ];
+            
+            return function() {
+                const pair = pairs[Math.floor(Math.random() * pairs.length)];
+                let html = `<div class="box task-content fade-in" id="current-box"><p>Find and click the odd character:</p><div class="odd-grid">`;
+                const targetIndex = Math.floor(Math.random() * 24); // 4x6 grid = 24 items
+                
+                for(let i=0; i<24; i++) {
+                    let char = (i === targetIndex) ? pair.odd : pair.normal;
+                    html += `<div class="odd-cell" onclick="if('${char}'==='${pair.odd}') nextLevel(); else triggerError();">${char}</div>`;
+                }
+                html += `</div><div class="error-toast" id="error-msg"></div></div>`;
+                container.innerHTML = html;
+            }
+        }
+
+        /**
+         * Generator: Visual Image Grid (Limited use as requested)
+         */
+        function genImageGrid(targetName, targetEmoji, fillers) {
+            return function() {
+                // Ensure 3 to 4 correct targets
+                let targetCount = Math.floor(Math.random() * 2) + 3; 
+                let pool = Array(targetCount).fill(targetEmoji);
+                
+                // Fill the rest of the 9 grid slots with random fillers
+                while(pool.length < 9) {
+                    pool.push(fillers[Math.floor(Math.random() * fillers.length)]);
+                }
+                // Shuffle array
+                pool.sort(() => Math.random() - 0.5);
+
+                container.innerHTML = `
+                    <div class="box task-content fade-in" id="current-box">
+                        <p style="font-size:14px; margin-top:0;">Select all images with a <strong>${targetName}</strong></p>
+                        <div class="image-grid">
+                            ${pool.map(e => `<div class="grid-item" onclick="this.classList.toggle('selected')" data-val="${e}">${e}</div>`).join('')}
+                        </div>
+                        <button class="action-btn" onclick="checkGrid('${targetEmoji}')">Verify</button>
+                        <div class="error-toast" id="error-msg"></div>
+                    </div>
+                `;
+            }
+        }
+
+        // Global function for the Image Grid logic
+        window.checkGrid = function(target) {
+            const selected = document.querySelectorAll('.grid-item.selected');
+            const allTargets = document.querySelectorAll(`.grid-item[data-val="${target}"]`);
+            let valid = true;
+            if(selected.length !== allTargets.length) valid = false;
+            selected.forEach(s => { if(s.getAttribute('data-val') !== target) valid = false; });
+            
+            if(valid) nextLevel(); 
+            else triggerError();
+        };
+
+
+        // =========================================
+        // DATA ARRAYS
+        // =========================================
+        
+          const triviaDatabase = [
+            // Programming / Web Dev
+            { q: "What does HTML stand for?", a: "hypertext markup language" },
+            { q: "What does CSS stand for?", a: "cascading style sheets" },
+            { q: "What is the standard markup language for documents designed to be displayed in a web browser?", a: "html" },
+            { q: "In Python, what keyword is used to define a function?", a: "def" },
+            { q: "What does DOM stand for in JavaScript?", a: "document object model" },
+            { q: "Is JavaScript a statically typed language? (yes/no)", a: "no" },
+            
+            // Logic & Math Theory
+            { q: "What is the only even prime number?", a: "2" },
+            { q: "If a triangle has a 90-degree angle, what is it called?", a: "right triangle" },
+            { q: "How many degrees are in a full circle?", a: "360" },
+            { q: "What is the square root of 144?", a: "12" },
+            { q: "What is 2 + 2 * 2?", a: "6" }, // BODMAS test
+            
+            // Chess 
+            { q: "How many squares are on a standard chessboard?", a: "64" },
+            { q: "Which chess piece moves exclusively diagonally?", a: "bishop" },
+            { q: "Which piece moves in an L-shape?", a: "knight" },
+            { q: "What is the competitive rating system used in chess called?", a: "elo" },
+            { q: "What year did Bobby Fischer win the World Chess Championship?", a: "1972" },
+            
+            // Literature, Pop Culture & Philosophy
+            { q: "Who authored 'The Myth of Sisyphus'?", a: "albert camus" },
+            { q: "Who wrote 'Notes from Underground'?", a: "dostoevsky" },
+            { q: "If you push a boulder up a hill for eternity, who are you?", a: "sisyphus" },
+            { q: "Which K-pop group has members Minji, Hanni, Danielle, Haerin, and Hyein?", a: "newjeans" },
+            
+            // General Anti-Bot
+            { q: "Type the word 'HUMAN' in reverse.", a: "namuh" },
+            { q: "If today is Monday, what is the day after tomorrow?", a: "wednesday" },
+            { q: "How many legs does a spider typically have?", a: "8" },
+            { q: "What color do you get by mixing red and blue?", a: "purple" }
+        ];
+
+        const typingDatabase = [
+            "DevXDave", "01101000", "console.log()", "document.getElementById", 
+            "I_AM_HUMAN", "def main():", "Python>JS", "Albert Camus", 
+            "Checkmate", "Bobby Fischer", "<script>", "CSS Flexbox"
+        ];
+
+
+        // =========================================
+        // MAIN GAME ENGINE & SEQUENCE BUILDER
+        // =========================================
+
+        /**
+         * Builds an array of 100 unique, randomized functions.
+         * Heavily favors Math based on user parameters.
+         */
+        function buildGameSequence() {
+            gameSequence = [];
+            
+            // --------------------------------------------------
+            // LEVEL 1: Fixed Checkbox Replica
+            // --------------------------------------------------
+            gameSequence.push(function() {
+                titleText.innerText = "Level 1: Verification";
+                container.innerHTML = `
+                    <div class="box recaptcha-layout fade-in" style="padding: 0; border: none;">
+                        <div class="box recaptcha-layout" style="margin:0;">
+                            <div class="checkbox-area">
+                                <input type="checkbox" id="robot-check">
+                                <span>I'm not a robot</span>
+                            </div>
+                            <div class="logo-area">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Vector_search_icon.svg/1200px-Vector_search_icon.svg.png" style="filter: grayscale(100%);" alt="logo">
+                                <span>reCAPTCHA</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                document.getElementById('robot-check').addEventListener('change', (e) => {
+                    if(e.target.checked) setTimeout(nextLevel, 450);
+                });
+            });
+
+            // --------------------------------------------------
+            // LEVELS 2-100: Procedural Pool Generation
+            // --------------------------------------------------
+            let dynamicPool = [];
+
+            // 1. Math Generation (~55 levels) - Heavy focus requested
+            for(let i=0; i<30; i++) dynamicPool.push(genMathArithmetic());
+            for(let i=0; i<15; i++) dynamicPool.push(genMathAlgebra());
+            for(let i=0; i<10; i++) dynamicPool.push(genMathSequence());
+
+            // 2. Trivia & Logic (~20 levels)
+            // Shuffle the trivia database so it's different every run
+            let shuffledTrivia = [...triviaDatabase].sort(() => Math.random() - 0.5);
+            for(let i=0; i<20; i++) {
+                if (shuffledTrivia[i]) {
+                    dynamicPool.push(genTrivia(shuffledTrivia[i].q, shuffledTrivia[i].a));
+                }
+            }
+
+            // 3. Typing Tests (~10 levels)
+            for(let i=0; i<10; i++) {
+                let randomWord = typingDatabase[Math.floor(Math.random() * typingDatabase.length)];
+                // Append a random number to guarantee string uniqueness
+                dynamicPool.push(genTypingTest(`${randomWord}_${Math.floor(Math.random()*99)}`));
+            }
+
+            // 4. Odd One Out (~10 levels)
+            for(let i=0; i<10; i++) dynamicPool.push(genOddOneOut());
+
+            // 5. Image Grids (Strictly limited to ~4 levels)
+            const gridConfigs = [
+                { n: "Car", t: "🚗", f: ["🚌", "🚲", "🏠", "🌳"] },
+                { n: "Bus", t: "🚌", f: ["🚗", "🚕", "🚦", "🏢"] },
+                { n: "Traffic Light", t: "🚦", f: ["🛑", "🚗", "🚧", "🚲"] },
+                { n: "Bicycle", t: "🚲", f: ["🛵", "🚗", "🧍", "🌳"] }
+            ];
+            for(let i=0; i<4; i++) {
+                let gc = gridConfigs[i % gridConfigs.length];
+                dynamicPool.push(genImageGrid(gc.n, gc.t, gc.f));
+            }
+
+            // At this point, dynamicPool has roughly 109 items. 
+            // We shuffle it using a sort algorithm to ensure randomness.
+            dynamicPool.sort(() => Math.random() - 0.5);
+
+            // Slice exactly 99 items to make the total 100 with Level 1
+            dynamicPool = dynamicPool.slice(0, 99);
+
+            // Merge Level 1 + The shuffled 99 levels
+            gameSequence = gameSequence.concat(dynamicPool);
+        }
+
+        /**
+         * Executes the current level function from the sequence array.
+         */
+        function loadLevel() {
+            // Check Win Condition
+            if (currentLevelIndex >= 100) {
+                titleText.innerText = "Security Passed";
+                container.innerHTML = `
+                    <div class="box task-content fade-in">
+                        <h2 style="color:var(--primary-blue); margin-top:0;">🎉 100% Human</h2>
+                        <p style="margin-bottom:5px;">System verification complete.</p>
+                        <p style="font-size:13px; color:var(--text-muted);">You survived all 100 levels.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            // Update Header Text dynamically based on depth
+            if (currentLevelIndex > 0) {
+                let headerString = "Security Test";
+                if (currentLevelIndex > 25) headerString = "Advanced Protocol";
+                if (currentLevelIndex > 50) headerString = "Deep System Scan";
+                if (currentLevelIndex > 75) headerString = "Final Verification";
+                
+                titleText.innerText = `Level ${currentLevelIndex + 1}: ${headerString}`;
+            }
+
+            // Execute the specific level's generator function
+            gameSequence[currentLevelIndex]();
+        }
+
+        function nextLevel() {
+            currentLevelIndex++;
+            loadLevel();
+        }
+
+
+        // =========================================
+        // RESET MODAL CONTROLLERS
+        // =========================================
+        function showReset() {
+            document.getElementById('reset-modal').style.display = 'flex';
+        }
+
+        function hideReset() {
+            document.getElementById('reset-modal').style.display = 'none';
+        }
+
+        function confirmReset() {
+            currentLevelIndex = 0;
+            hideReset();
+            // Completely rebuild the random 99 array so it's fresh
+            buildGameSequence(); 
+            loadLevel();
+        }
+
+
+        // =========================================
+        // INITIALIZATION
+        // =========================================
+        // Build the sequence upon first loading the page, then load Level 1.
+        buildGameSequence();
+        loadLevel();
+
+    </script>
+</body>
+</html>
+        
